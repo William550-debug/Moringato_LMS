@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">  
+            <h2>Moringato</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+            <li><a href="#students" class="nav-link">Students</a></li>
+            <li><a href="#assignments" class="nav-link">Assignments</a></li>
+            <li><a href="#analytics" class="nav-link">Analytics</a></li>
+        </ul>
+        <div class="logout">
+            <a href="{% url 'logout'%}" class="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Instructor Dashboard -->
+    <main class="dashboard">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="container">
+                <h1>Welcome, {{ user.username}}!</h1>
+                <p>Manage your courses, track student progress, and create assignments from your dashboard.</p>
+            </div>
+        </section>
+
+        <!-- Quick Stats Section -->
+        <section class="quick-stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <!-- Stat 1: Total Courses -->
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Total Courses</h3>
+                        <p class="stat-value">12</p>
+                    </div>
+
+                    <!-- Stat 2: Active Students -->
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Active Students</h3>
+                        <p class="stat-value">350</p>
+                    </div>
+
+                    <!-- Stat 3: Assignments Due -->
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3>Assignments Due</h3>
+                        <p class="stat-value">5</p>
+                    </div>
+
+                    <!-- Stat 4: Messages -->
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>New Messages</h3>
+                        <p class="stat-value">3</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Activity Section -->
+        <section class="recent-activity">
+            <div class="container">
+                <h2>Recent Activity</h2>
+                <div class="activity-grid">
+                    <!-- Activity 1 -->
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h3>Assignment Graded</h3>
+                            <p>You graded "React Basics" for John Doe.</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+
+                    <!-- Activity 2 -->
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h3>New Comment</h3>
+                            <p>Jane Smith commented on "JavaScript Advanced".</p>
+                            <span class="activity-time">5 hours ago</span>
+                        </div>
+                    </div>
+
+                    <!-- Activity 3 -->
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <div class="activity-details">
+                            <h3>New Submission</h3>
+                            <p>Mike Johnson submitted "Node.js Assignment".</p>
+                            <span class="activity-time">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Upload Section-->
+         <!--Upload section-->
+         <section class="upload-section">
+            <div class="container">
+                <h2 class="section-title">Upload Files</h2>
+                <p class="section-subtitle">Select a file category and upload your file.</p>
+    
+                <div class="upload-grid">
+                    
+                    <!-- Upload Notes -->
+                    <div class="upload-card">
+                        <h3>Upload Notes</h3>
+                        <div class="upload-box" id="upload-notes">
+                            <i class="fas fa-file-alt"></i>
+                            <p>Drag & drop files here</p>
+                            <form method="post" action="{% url 'upload-note' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ note_form.as_p }}
+                                <button type="submit" class="upload-btn">Upload Note</button>
+                            </form>
+                           
+                        </div>
+                      
+                    </div>
+
+                   
+    
+                    <!-- Upload Assignments -->
+                    <div class="upload-card">
+                        <h3>Upload Assignments</h3>
+                        <div class="upload-box" id="upload-assignments">
+                            <i class="fas fa-tasks"></i>
+                            <p>Drag & drop files here</p>
+                            <form method="post" action="{% url 'upload-assignment' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ assignment_form.as_p }}
+                                <button type="submit" class="upload-btn">Upload Assignment</button>
+                            </form>
+                            
+                        </div>
+                    
+                    </div>
+
+                    
+                    
+    
+                    <!-- Upload Tutorials -->
+                    
+                    <div class="upload-card">
+                        <h3>Upload Tutorials</h3>
+                        <div class="upload-box" id="upload-tutorials">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <p>Drag & drop files here</p>
+                            <form method="post" action="{% url 'upload-tutorial' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ tutorial_form.as_p }}
+                                <button type="submit" class="upload-btn">Upload Tutorial</button>
+                            </form>
+                        </div>
+                    </div>
+    
+                 
+                   <!-- instructor_dashboard.html -->
+                    <div class="upload-card">
+                        <h3>Upload Quizzes</h3>
+                        <div class="upload-box" id="upload-quizzes" >
+                            <i class="fas fa-question-circle"></i>
+                            <p>Drag & drop files here</p>
+                            <form method="post" enctype="multipart/form-data"  action="{% url 'quiz_upload' %}">
+                                {% csrf_token %}
+                                {{ quiz_form.as_p }}
+                                <button type="submit" class="upload-btn">Upload Quiz</button>
+                            </form>
+                        </div>
+                    </div>
+                
+    
+                </div>
+            </div>
+        </section>
+
+        <!-- Grade Assessment Section -->
+        <section class="grade-assessment-section">
+            <div class="container">
+                <h2 class="section-title">Grade Assessment</h2>
+                <p class="section-subtitle">Review student submissions and assign grades.</p>
+    
+                <!-- Submissions Table -->
+                <div class="submissions-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Submission</th>
+                                <th>Status</th>
+                                <th>Grade</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for submission in submissions %}
+                            <tr id="submission-{{ submission.id }}">
+                                <td>{{ submission.student.username }}</td>
+                                <td><a href="{{ submission.file.url }}" class="submission-link">Download Submission</a></td>
+                                <td>
+                                    <span class="status {% if submission.grade is not None %}assigned{% else %}pending{% endif %}">
+                                        {% if submission.grade is not None %}Assigned{% else %}Pending{% endif %}
+                                    </span>
+                                </td>
+                                <td>
+                                    <input type="text" class="grade-input" id="grade-{{ submission.id }}" value="{{ submission.grade|default:'' }}" placeholder="Enter grade">
+                                </td>
+                                <td>
+                                    <button class="grade-btn" data-submission-id="{{ submission.id }}" {% if submission.grade is not None %}disabled{% endif %}>
+                                        Submit Grade
+                                    </button>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5">No submissions available.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3 class="footer-title">About Moringato</h3>
+                    <p class="footer-description">
+                        Moringato is your one-stop platform for tutorials, notes, grades, and assignments. We aim to make learning accessible and enjoyable for everyone.
+                    </p>
+                </div>
+    
+                <!-- Quick Links Section -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#tutorials">Tutorials</a></li>
+                        <li><a href="#notes">Notes</a></li>
+                        <li><a href="#grades">Grades</a></li>
+                        <li><a href="#assignments">Assignments</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Contact Section -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Learning Street, EduCity</li>
+                        <li><i class="fas fa-phone"></i> +123 456 7890</li>
+                        <li><i class="fas fa-envelope"></i> support@moringato.com</li>
+                    </ul>
+                </div>
+    
+                <!-- Social Media Section -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Follow Us</h3>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Moringato. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/df5718a65e.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('.grade-btn').click(function() {
+                var submissionId = $(this).data('submission-id');
+                var grade = $('#grade-' + submissionId).val();
+                var button = $(this);
+
+                $.ajax({
+                    url: "{% url 'grade-submission' 0 %}".replace("0", submissionId),
+                    type: 'POST',
+                    data: {
+                        'grade': grade,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            alert('Grade submitted successfully!');
+                            // Update the status to "Assigned" (green)
+                            $('#submission-' + submissionId + ' .status')
+                                .text('Assigned')
+                                .removeClass('pending')
+                                .addClass('assigned');
+                            // Disable the submit button and change its color to dark grey
+                            button.prop('disabled', true);
+                            button.css('background-color', '#6c757d');
+                        } else {
+                            alert('Error: ' + response.errors);
+                        }
+                    },
+                    error: function() {
+                        alert('An error occurred while submitting the grade.');
+                    }
+                });
+            });
+        });
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.querySelector('.file-input');
+        const selectFileBtn = document.querySelector('.upload-btn:first-of-type');
+        const uploadBtn = document.querySelector('.upload-btn:last-of-type');
+
+        selectFileBtn.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', function() {
+            if (fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                selectFileBtn.textContent = fileName;
+            }
+        });
+    });
+
+    </script>
+</body>
+</html>

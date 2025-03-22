@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Questions</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #007bff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            transition: 0.3s ease;
+        }
+
+        li:hover {
+            background: #0056b3;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: block;
+        }
+
+        .home{
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        {% block content %}
+        <h1>Quiz Questions</h1>
+        <ul>
+            {% for question in questions %}
+            <li>
+                <a href="{% url 'attempt_quiz' question.pk %}">{{ question.question_text }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endblock %}
+
+        <a href="{% url 'quiz_upload' %}" class="home">Back to Upload Quiz</a>
+
+       
+    </div>
+
+    
+
+</body>
+</html>

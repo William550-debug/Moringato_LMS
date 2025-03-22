@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Quiz Question</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+        }
+
+        .home{
+            color: #007bff;
+        }
+        .links{
+            display: flex;
+            justify-content: space-evenly;
+            
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        {% block content %}
+        <h1>Upload Quiz Question</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+           <div class="links">
+            <button type="submit">Upload</button>
+
+            <a href="{% url 'instructor-dashboard' %}">Back to Dashboard</a>
+           </div>
+        </form>
+        {% endblock %}
+
+        
+    </div>
+
+    
+
+</body>
+</html>

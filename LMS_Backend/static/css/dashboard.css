@@ -1,0 +1,656 @@
+
+/* imports */
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+
+
+/*-----------------------------------*\
+  #CUSTOM PROPERTY
+\*-----------------------------------*/
+
+:root {
+
+    /**
+     * colors
+     */
+    --primary-color: hsl(0, 0%, 60%);
+    --dark-jungle-green: hsl(188, 63%, 7%);
+    --prussian-blue: hsl(200, 69%, 14%);
+    --navy-blue: hsl(240, 60%, 25%);
+    --light-blue: hsl(197, 87%, 57%);
+    --raisin-black-1: hsl(227, 29%, 13%);
+    --raisin-black-2: hsl(229, 17%, 19%);
+    --yellow-green: hsl(89, 72%, 45%);
+    --orange-soda: hsl(9, 100%, 62%);
+    --cultured-1: hsl(0, 0%, 93%);
+    --cultured-2: hsl(192, 24%, 96%);
+    --misty-rose: hsl(7, 56%, 91%);
+    --alice-blue: hsl(210, 100%, 97%);
+    --seashell: hsl(8, 100%, 97%);
+    --cadet: hsl(200, 15%, 43%);
+    --white: hsl(0, 0%, 100%);
+    --black: hsl(0, 0%, 0%);
+    --opal: hsl(180, 20%, 62%);
+
+    /**
+     * typography
+     */
+    --ff-nunito-sans: "Nunito Sans", sans-serif;
+    --ff-poppins: "Poppins", sans-serif;
+
+    --fs-1: 1.875rem;
+    --fs-2: 1.45rem;
+    --fs-3: 1.375rem;
+    --fs-4: 1.125rem;
+    --fs-5: 0.875rem;
+    --fs-6: 0.813rem;
+    --fs-7: 0.75rem;
+    --fw-500: 500;
+    --fw-600: 600;
+    --fw-700: 700;
+
+    /**
+     * transition
+     */
+    --transition: 0.25s ease;
+
+    /**
+     * spacing
+     */
+    --section-padding: 100px;
+
+    /**
+     * shadow
+     */
+    --shadow-1: 0 5px 20px 0 hsla(219, 56%, 21%, 0.1);
+    --shadow-2: 0 16px 32px hsla(188, 63%, 7%, 0.1);
+}
+
+/*-----------------------------------*\
+  #BASE
+\*-----------------------------------*/
+
+
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+a,
+i,
+img,
+span,
+button{
+  display: block;
+}
+
+button{
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+i{
+  pointer-events: none;
+}
+
+html{
+  font-family: var(--ff-nunito-sans);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--alice-blue);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar{
+  width: 10px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track{
+  width: 10px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+  background: var(--cadet);
+  border-left: 2px solid var(--white);
+}
+
+
+/*-----------------------------------*\
+  #HEADER
+\*-----------------------------------*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--raisin-black-2);
+    box-shadow: var(--shadow-2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h2 {
+    font-family: 'Pangolin', cursive;
+    font-size: var(--fs-2);
+    color: var(--light-blue);
+    margin: 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--cultured-1);
+    font-size: var(--fs-5);
+    font-weight: var(--fw-500);
+    transition: color var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--light-blue);
+}
+
+.logout .logout-btn {
+    background-color: var(--orange-soda);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: var(--fs-5);
+    font-weight: var(--fw-600);
+    transition: background-color var(--transition);
+}
+
+.logout .logout-btn:hover {
+    background-color: var(--yellow-green);
+}
+
+
+
+
+/* Dashboard Styles */
+.dashboard {
+    padding: 2rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Welcome Section */
+.welcome-section {
+    background-color: var(--prussian-blue);
+    color: var(--white);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.welcome-section h1 {
+    font-size: var(--fs-1);
+    margin-bottom: 0.5rem;
+}
+
+.welcome-section p {
+    font-size: var(--fs-4);
+    color: var(--cultured-1);
+}
+
+/* Quick Stats Section */
+.quick-stats {
+    padding: 2rem 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.stat-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow-1);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-2);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    color: var(--light-blue);
+    margin-bottom: 1rem;
+}
+
+.stat-card h3 {
+    font-size: var(--fs-4);
+    color: var(--prussian-blue);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: var(--fs-2);
+    font-weight: var(--fw-700);
+    color: var(--cadet);
+}
+
+/* Recent Activity Section */
+.recent-activity {
+    padding: 2rem 0;
+}
+
+.recent-activity h2 {
+    font-size: var(--fs-2);
+    color: var(--prussian-blue);
+    margin-bottom: 1.5rem;
+}
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.activity-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--shadow-1);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-2);
+}
+
+.activity-icon {
+    font-size: 1.5rem;
+    color: var(--light-blue);
+}
+
+.activity-details h3 {
+    font-size: var(--fs-5);
+    color: var(--prussian-blue);
+    margin-bottom: 0.5rem;
+}
+
+.activity-details p {
+    font-size: var(--fs-6);
+    color: var(--cadet);
+    margin-bottom: 0.5rem;
+}
+
+.activity-time {
+    font-size: var(--fs-7);
+    color: var(--opal);
+}
+
+/* Upload Section Styles */
+.upload-section {
+    padding: var(--section-padding) 0;
+    background-color: var(--cultured-2);
+}
+
+.upload-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.upload-section .section-title {
+    font-size: var(--fs-2);
+    font-weight: var(--fw-700);
+    color: var(--prussian-blue);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.upload-section .section-subtitle {
+    font-size: var(--fs-4);
+    color: var(--cadet);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.upload-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.upload-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-1);
+    transition: transform var(--transition), box-shadow var(--transition);
+    text-align: center;
+}
+
+.upload-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-2);
+}
+
+.upload-card h3 {
+    font-size: var(--fs-4);
+    font-weight: var(--fw-600);
+    color: var(--prussian-blue);
+    margin-bottom: 1rem;
+}
+
+.upload-box {
+    border: 2px dashed var(--light-blue);
+    border-radius: 10px;
+    padding: 1.5rem;
+    background-color: var(--alice-blue);
+    cursor: pointer;
+    transition: border-color var(--transition), background-color var(--transition);
+}
+
+.upload-box:hover {
+    border-color: var(--navy-blue);
+    background-color: var(--cultured-1);
+}
+
+.upload-box i {
+    font-size: 2rem;
+    color: var(--light-blue);
+    margin-bottom: 1rem;
+}
+
+.upload-box p {
+    font-size: var(--fs-5);
+    color: var(--cadet);
+    margin-bottom: 1rem;
+}
+
+.file-input {
+    display: none; /* Hide the default file input */
+}
+
+.upload-btn {
+    display: inline-block;
+    background-color: var(--light-blue);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: var(--fs-5);
+    font-weight: var(--fw-600);
+    cursor: pointer;
+    transition: background-color var(--transition);
+}
+
+.upload-btn:hover {
+    background-color: var(--navy-blue);
+}
+
+
+
+
+/* Grade Assessment Section Styles */
+.grade-assessment-section {
+    padding: var(--section-padding) 0;
+    background-color: var(--white);
+}
+
+.grade-assessment-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.grade-assessment-section .section-title {
+    font-size: var(--fs-2);
+    font-weight: var(--fw-700);
+    color: var(--prussian-blue);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.grade-assessment-section .section-subtitle {
+    font-size: var(--fs-4);
+    color: var(--cadet);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Submissions Table Styles */
+.submissions-table {
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+}
+
+.submissions-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--white);
+    box-shadow: var(--shadow-1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.submissions-table th,
+.submissions-table td {
+    padding: 1rem;
+    text-align: left;
+}
+
+.submissions-table th {
+    background-color: var(--prussian-blue);
+    color: var(--white);
+    font-weight: var(--fw-600);
+}
+
+.submissions-table td {
+    border-bottom: 1px solid var(--cultured-2);
+}
+
+.submissions-table tr:hover {
+    background-color: var(--cultured-1);
+}
+
+.submission-link {
+    color: var(--light-blue);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.submission-link:hover {
+    color: var(--navy-blue);
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: var(--fs-6);
+    font-weight: var(--fw-600);
+}
+
+.status.submitted {
+    background-color: var(--yellow-green);
+    color: var(--white);
+}
+
+.status.pending {
+    background-color: var(--orange-soda);
+    color: var(--white);
+}
+
+.grade-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--cultured-2);
+    border-radius: 5px;
+    font-size: var(--fs-5);
+    color: var(--prussian-blue);
+    transition: border-color var(--transition);
+}
+
+.grade-input:focus {
+    border-color: var(--light-blue);
+    outline: none;
+}
+
+.grade-btn {
+    background-color: var(--light-blue);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: var(--fs-5);
+    font-weight: var(--fw-600);
+    cursor: pointer;
+    transition: background-color var(--transition);
+}
+
+.grade-btn:hover {
+    background-color: var(--navy-blue);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .submissions-table {
+        display: block;
+    }
+
+    .submissions-table th,
+    .submissions-table td {
+        padding: 0.75rem;
+    }
+
+    .grade-input {
+        width: 80px; /* Adjust input width for smaller screens */
+    }
+}
+
+
+/* Footer Styles */
+.footer {
+    background-color: var(--raisin-black-2);
+    color: var(--cultured-1);
+    padding: var(--section-padding) 0;
+}
+
+.footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section {
+    text-align: left;
+}
+
+.footer-title {
+    font-size: var(--fs-3);
+    font-weight: var(--fw-600);
+    color: var(--light-blue);
+    margin-bottom: 1rem;
+}
+
+.footer-description {
+    font-size: var(--fs-5);
+    color: var(--cultured-1);
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: var(--cultured-1);
+    font-size: var(--fs-5);
+    transition: color var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--light-blue);
+}
+
+.footer-contact {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-contact li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--fs-5);
+    color: var(--cultured-1);
+}
+
+.footer-contact i {
+    color: var(--light-blue);
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    color: var(--cultured-1);
+    font-size: 1.25rem;
+    transition: color var(--transition);
+}
+
+.social-link:hover {
+    color: var(--light-blue);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--raisin-black-1);
+    font-size: var(--fs-5);
+    color: var(--cultured-1);
+}

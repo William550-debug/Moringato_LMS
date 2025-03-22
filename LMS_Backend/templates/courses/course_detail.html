@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+{% block content %}
+<h2>{{ course.title }}</h2>
+<p>{{ course.description }}</p>
+
+<h3>Assignments</h3>
+<a href="{% url 'assignment-list' course.id %}">View Assignments</a>
+
+<h3>Tutorials</h3>
+<a href="{% url 'tutorial-list' course.id %}">View Tutorials</a>
+
+<h3>Quizzes</h3>
+<a href="{% url 'quiz-create' %}">Create Quiz</a>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moringato Primary - Assignment Details</title>
+    <style>
+
+          :root {
+            --primary-blue: #1e90ff; /* Dodger Blue */
+            --secondary-blue: #87cefa; /* Light Sky Blue */
+            --dark-blue: #003366; /* Dark Midnight Blue */
+            --light-blue: #e6f7ff; /* Very Light Blue */
+            --white: #ffffff;
+            --gray: #f0f0f0;
+        }
+        body {
+            font-family: sans-serif;
+            background-color: #e6f2ff; /* Light blue background */
+            color: #1a365d; /* Darker blue text */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure full viewport height */
+        }
+
+        .container {
+            width: 80%;
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        h2 {
+            color: #2962ff; /* Brighter blue heading */
+            margin-bottom: 10px;
+            border-bottom: 2px solid #d0e3fa; /* Light blue line under heading */
+            padding-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: #3f51b5; /* Slightly darker blue for labels */
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2962ff; /* Brighter blue button */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease; /* Smooth hover effect */
+        }
+
+        .back-link:hover {
+            background-color: #1a365d; /* Darker blue on hover */
+        }
+
+        footer {
+            background-color: #1a365d; /* Darker blue footer */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto; /* Push footer to bottom */
+        }
+
+        button{
+         background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        {% block content %}
+        <h2>Assignment: {{assignment.title}}</h2>
+
+        <p><strong>Description:</strong> {{assignment.description}}</p>
+        <p><strong>Due Date:</strong> {{assignment.due_date}}</p>
+        <p><strong>Assigned To:</strong> {{ assignment.issued_by}}</p>
+
+        <form method="POST" action="{% url 'delete-assignment' assignment.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+        </form>
+
+        <a href="{% url 'instructor-dashboard' %}" class="back-link">Back to Home</a>
+        {% endblock %}
+    </div>
+
+</body>
+
+</html>
