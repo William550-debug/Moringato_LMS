@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Tutorial</title>
+    <style>
+        /* Modern Blue Color Palette */
+        :root {
+            --primary-blue: #1e90ff; /* Dodger Blue */
+            --secondary-blue: #87cefa; /* Light Sky Blue */
+            --dark-blue: #003366; /* Dark Midnight Blue */
+            --light-blue: #e6f7ff; /* Very Light Blue */
+            --white: #ffffff;
+            --gray: #f0f0f0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: var(--dark-blue);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: var(--secondary-blue);
+            color: var(--white);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        form {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        form button {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        form button:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: var(--white);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .card h3 {
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--dark-blue);
+            font-size: 14px;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload Tutorial</h2>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form action="{% url 'upload-tutorial' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Uploaded Tutorials</h2>
+    <div class="grid">
+        {% for tutorial in tutorials %}
+            <div class="card">
+                <h3>{{ tutorial.title }}</h3>
+                <p>{{ tutorial.description }}</p>
+                <video controls>
+                    <source src="{{ tutorial.video.url }}" type="video/mp4"  >
+                    Your browser does not support the video tag.
+                </video>
+                <form method="POST" action="{% url 'delete_tutorial' tutorial.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                </form>
+            </div>
+        {% empty %}
+            <p>No tutorials uploaded yet.</p>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'instructor-dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

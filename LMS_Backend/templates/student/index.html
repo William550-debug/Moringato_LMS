@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moringato</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <h2>Moringato</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#tutorials">Tutorials</a></li>
+            <li><a href="#notes">Notes</a></li>
+            <li><a href="#grades">Grades</a></li>
+            <li><a href="#assignments">Assignments</a></li>
+        </ul>
+        <div class="logout">
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="container">
+                <div class="welcome-content">
+                    <h2>Hello {{ user.username }}</h2>
+                    <h1 class="welcome-title">Welcome to Moringato!</h1>
+                    <p class="welcome-subtitle">
+                        Your ultimate learning platform for tutorials, notes, grades, and assignments. Start your journey to success today!
+                    </p>
+                    <div class="welcome-actions">
+                        <a href="#tutorials" class="welcome-button">Explore Tutorials</a>
+                        <a href="{% url  'register' %}" class="welcome-button outline">Sign Up Now</a>
+                    </div>
+                </div>
+                <div class="welcome-image">
+                    <img src="{% static 'images/welcome-logo.jpg' %}" alt="Learning Illustration">
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutorials Section -->
+        <section id="tutorials" class="section tutorials-section">
+            <div class="container">
+                <h2 class="section-title">Tutorials</h2>
+                <p class="section-subtitle">Learn and master new skills with our comprehensive tutorials.</p>
+                <div class="tutorials-grid">
+                    {% for tutorial in tutorials %}
+                    <div class="tutorial-card">
+                        <div class="card-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="card-title">{{ tutorial.title }}</h3>
+                        <p class="card-description">{{ tutorial.description }}</p>
+                        <video id="video-{{ tutorial.id }}" controls style="display: none;">
+                            <source src="{{ tutorial.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        
+                        <a href="#" class="card-button start-learning-btn" data-video-id="video-{{ tutorial.id }}">Start Learning</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Notes Section -->
+           <!-- Notes Section -->
+    <section class="notes-section" id="notes">
+     <div class="container">
+        <h2>Notes</h2>
+        {% if notes %}
+            <div class="notes-grid">
+                {% for note in notes %}
+                    <div class="note-card">
+                        <h3>{{ note.topic }}</h3>
+                        <p>Course: {{ note.course.title }}</p>
+                        <p>Uploaded on: {{ note.uploaded_at }}</p>
+                        <a href="{{ note.file.url }}" class="download-link">Download Note</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No notes available for your enrolled courses.</p>
+        {% endif %}
+     </div>
+    </section>
+
+        <!-- Grades Section -->
+            <!-- Grades Section -->
+    <section id="grades" class="section grades-section">
+        <div class="container">
+            <h2 class="section-title">Grades</h2>
+            <p class="section-subtitle">Track your academic progress and performance.</p>
+            <div class="grades-grid">
+                {% for submission in submissions %}
+                <div class="grade-card">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="card-title">{{ submission.assignment.title }}</h3>
+                    <p class="card-description">Grade: {{ submission.grade|default:"Not graded yet" }}</p>
+                    <a href="{{ submission.file.url }}" class="card-button">View Submission</a>
+                </div>
+                {% empty %}
+                <p>No grades available.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+        <!-- Assignments Section -->
+        <section id="assignments" class="section assignments-section">
+            <div class="container">
+                <h2 class="section-title">Assignments</h2>
+                <p class="section-subtitle">Stay on top of your tasks and deadlines.</p>
+                <div class="assignments-grid">
+                    {% for assignment in assignments %}
+                    <div class="assignment-card">
+                        <h3>{{ assignment.title }}</h3>
+                        <p>{{ assignment.description }}</p>
+                        <p>Due: {{ assignment.due_date }}</p>
+                        <a href="{% if assignment.file %}{{ assignment.file.url }}{% else %}#{% endif %}" class="download-link">
+                            Download Assignment
+                        </a>
+                        <a href="{% url 'submit-assignment' assignment.id %}" class="card-button">Submit Assignment</a>
+                        {% if assignment.submissions.exists %}
+                        
+                        {% endif %}
+                    </div>
+                    {% empty %}
+                    <p>No assignments available.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="section quiz-section">
+            <div class="container">
+                <h2 class="section-title">Quizzes</h2>
+                <p class="section-subtitle">Test your knowledge with these quizzes.</p>
+                <div class="quiz-grid">
+                    {% for quiz in quizzes %}
+                    <div class="quiz-card" id="quiz-{{ quiz.id }}">
+                        <h3>{{ quiz.question_text }}</h3>
+                        <form class="quiz-form" method="post" data-quiz-id="{{ quiz.id }}">
+                            {% csrf_token %}
+                            <input type="hidden" name="quiz_id" value="{{ quiz.id }}">
+                            <div class="quiz-choices">
+                                {% for choice in quiz.choices %}
+                                <label class="choice-label" data-choice="{{ choice }}">
+                                    <input type="radio" name="selected_answer" value="{{ choice }}" required> {{ choice }}
+                                </label><br>
+                                {% endfor %}
+                            </div>
+                            <button type="submit" class="card-button">Submit Answer</button>
+                        </form>
+                        <div class="quiz-result" id="quiz-result-{{ quiz.id }}" style="display: none;">
+                            <p class="result-message"></p>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p>No quizzes available at the moment.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 class="footer-title">About Moringato</h3>
+                    <p class="footer-description">Moringato is your one-stop platform for learning.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#tutorials">Tutorials</a></li>
+                        <li><a href="#notes">Notes</a></li>
+                        <li><a href="#grades">Grades</a></li>
+                        <li><a href="#assignments">Assignments</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Learning Street</li>
+                        <li><i class="fas fa-phone"></i> +123 456 7890</li>
+                        <li><i class="fas fa-envelope"></i> support@moringato.com</li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Follow Us</h3>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Moringato. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="https://kit.fontawesome.com/df5718a65e.js" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add event listeners to all "Start Learning" buttons
+        const startLearningButtons = document.querySelectorAll('.start-learning-btn');
+        startLearningButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default link behavior
+
+                // Get the video ID from the data attribute
+                const videoId = button.getAttribute('data-video-id');
+                const video = document.getElementById(videoId);
+
+                // Toggle between "Start Learning" and "Stop Learning"
+                if (button.getAttribute('data-state') === 'start') {
+                    // Show the video element if it's hidden
+                    video.style.display = 'block';
+
+                    // Start playing the video
+                    video.play();
+
+                    // Update button text and state
+                    button.textContent = 'Stop Learning';
+                    button.setAttribute('data-state', 'stop');
+                } else {
+                    // Pause the video
+                    video.pause();
+
+                    // Update button text and state
+                    button.textContent = 'Start Learning';
+                    button.setAttribute('data-state', 'start');
+                }
+            });
+        });
+    });
+
+    document.querySelectorAll('.quiz-form').forEach(form => {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            const form = e.target;
+            const formData = new FormData(form);
+            const quizId = form.dataset.quizId; // Get the quiz ID from the form
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest', // Indicate this is an AJAX request
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the UI for the specific quiz
+                const quizResult = document.getElementById(`quiz-result-${quizId}`);
+                const resultMessage = quizResult.querySelector('.result-message');
+                const selectedLabel = form.querySelector(`label[data-choice="${data.selected_answer}"]`);
+
+                if (data.result) {
+                    resultMessage.textContent = 'Correct!';
+                    resultMessage.style.color = 'green';
+                    selectedLabel.style.color = 'green'; // Highlight correct answer in green
+                } else {
+                    resultMessage.textContent = `Incorrect. The correct answer is: ${data.correct_answer}`;
+                    resultMessage.style.color = 'red';
+                    selectedLabel.style.color = 'red'; // Highlight incorrect answer in red
+                }
+
+                quizResult.style.display = 'block'; // Show the result message
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+
+   
+    </script>
+
+</body>
+</html>

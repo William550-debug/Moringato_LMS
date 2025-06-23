@@ -1,0 +1,900 @@
+/* imports */
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+
+
+/*-----------------------------------*\
+  #CUSTOM PROPERTY
+\*-----------------------------------*/
+
+:root {
+
+    /**
+     * colors
+     */
+    --primary-color: hsl(0, 0%, 60%);
+    --dark-jungle-green: hsl(188, 63%, 7%);
+    --prussian-blue: hsl(200, 69%, 14%);
+    --navy-blue: hsl(240, 60%, 25%);
+    --light-blue: hsl(197, 87%, 57%);
+    --raisin-black-1: hsl(227, 29%, 13%);
+    --raisin-black-2: hsl(229, 17%, 19%);
+    --yellow-green: hsl(89, 72%, 45%);
+    --orange-soda: hsl(9, 100%, 62%);
+    --cultured-1: hsl(0, 0%, 93%);
+    --cultured-2: hsl(192, 24%, 96%);
+    --misty-rose: hsl(7, 56%, 91%);
+    --alice-blue: hsl(210, 100%, 97%);
+    --seashell: hsl(8, 100%, 97%);
+    --cadet: hsl(200, 15%, 43%);
+    --white: hsl(0, 0%, 100%);
+    --black: hsl(0, 0%, 0%);
+    --opal: hsl(180, 20%, 62%);
+
+    /**
+     * typography
+     */
+    --ff-nunito-sans: "Nunito Sans", sans-serif;
+    --ff-poppins: "Poppins", sans-serif;
+
+    --fs-1: 1.875rem;
+    --fs-2: 1.45rem;
+    --fs-3: 1.375rem;
+    --fs-4: 1.125rem;
+    --fs-5: 0.875rem;
+    --fs-6: 0.813rem;
+    --fs-7: 0.75rem;
+    --fw-500: 500;
+    --fw-600: 600;
+    --fw-700: 700;
+
+    /**
+     * transition
+     */
+    --transition: 0.25s ease;
+
+    /**
+     * spacing
+     */
+    --section-padding: 100px;
+
+    /**
+     * shadow
+     */
+    --shadow-1: 0 5px 20px 0 hsla(219, 56%, 21%, 0.1);
+    --shadow-2: 0 16px 32px hsla(188, 63%, 7%, 0.1);
+}
+
+/*-----------------------------------*\
+  #BASE
+\*-----------------------------------*/
+
+
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+a,
+i,
+img,
+span,
+button{
+  display: block;
+}
+
+button{
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+i{
+  pointer-events: none;
+}
+
+html{
+  font-family: var(--ff-nunito-sans);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--alice-blue);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar{
+  width: 10px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track{
+  width: 10px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+  background: var(--cadet);
+  border-left: 2px solid var(--white);
+}
+
+
+/*-----------------------------------*\
+  #HEADER
+\*-----------------------------------*/
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--raisin-black-2);
+    box-shadow: var(--shadow-2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h2 {
+    font-family: 'Pangolin', cursive;
+    font-size: var(--fs-2);
+    color: var(--light-blue);
+    margin: 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--cultured-1);
+    font-size: var(--fs-5);
+    font-weight: var(--fw-500);
+    transition: color var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--light-blue);
+}
+
+.logout .logout-btn {
+    background-color: var(--orange-soda);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: var(--fs-5);
+    font-weight: var(--fw-600);
+    transition: background-color var(--transition);
+}
+
+.logout .logout-btn:hover {
+    background-color: var(--yellow-green);
+}
+
+/* Body Styles */
+body {
+    font-family: var(--ff-nunito-sans);
+    background-color: var(--alice-blue);
+    color: var(--raisin-black-1);
+    line-height: 1.6;
+}
+
+/* Welcome Section Styles */
+/* Welcome Section Styles */
+.welcome-section {
+    background: linear-gradient(135deg, var(--prussian-blue), var(--navy-blue));
+    color: var(--white);
+    padding: 4rem 0;
+    overflow: hidden;
+}
+
+.welcome-section .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.welcome-content {
+    max-width: 600px;
+    z-index: 1; /* Ensure content stays above the image */
+}
+
+.welcome-title {
+    font-size: var(--fs-1);
+    font-weight: var(--fw-700);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: var(--white);
+}
+
+.welcome-subtitle {
+    font-size: var(--fs-4);
+    color: var(--cultured-1);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.welcome-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.welcome-button {
+    display: inline-block;
+    background-color: var(--light-blue);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: var(--fs-5);
+    font-weight: var(--fw-600);
+    text-align: center;
+    transition: background-color var(--transition), transform var(--transition);
+}
+
+.welcome-button.outline {
+    background-color: transparent;
+    border: 2px solid var(--light-blue);
+    color: var(--light-blue);
+}
+
+.welcome-button:hover {
+    background-color: var(--navy-blue);
+    transform: translateY(-3px);
+}
+
+.welcome-button.outline:hover {
+    background-color: var(--light-blue);
+    color: var(--white);
+}
+
+.welcome-image {
+    max-width: 500px;
+    position: relative;
+    z-index: 0; /* Ensure image stays behind content */
+}
+
+.welcome-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: var(--shadow-2);
+    animation: float 4s ease-in-out infinite; /* Add floating animation */
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-section .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .welcome-content {
+        max-width: 100%;
+    }
+
+    .welcome-actions {
+        justify-content: center;
+    }
+
+    .welcome-image {
+        margin-top: 2rem;
+        max-width: 100%;
+    }
+}
+
+/* Section Styles */
+.section {
+    padding: var(--section-padding) 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.section-title {
+    font-size: var(--fs-1);
+    font-weight: var(--fw-700);
+    color: var(--prussian-blue);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: var(--fs-4);
+    color: var(--cadet);
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Tutorials Grid */
+.tutorials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* Tutorial Card Styles */
+.tutorial-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: var(--shadow-1);
+    transition: transform var(--transition), box-shadow var(--transition);
+    text-align: center;
+}
+
+.tutorial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-2);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--light-blue);
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-size: var(--fs-3);
+    font-weight: var(--fw-600);
+    color: var(--prussian-blue);
+    margin-bottom: 1rem;
+}
+
+.card-description {
+    font-size: var(--fs-5);
+    color: var(--cadet);
+    margin-bottom: 1.5rem;
+}
+
+.card-button {
+    display: inline-block;
+    background-color: var(--light-blue);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: var(--fs-5);
+    font-weight: var(--fw-600);
+    transition: background-color var(--transition);
+}
+
+.card-button:hover {
+    background-color: var(--navy-blue);
+}
+
+/* Notes Section Styles */
+.notes-section {
+    background-color: var(--cultured-2);
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* Note Card Styles */
+        /* Notes Section */
+        .notes-section {
+            padding: 2rem;
+        }
+
+        .notes-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .note-card {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .note-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .note-card p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .download-link {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-link:hover {
+            background-color: #0056b3;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none; /* Hide the video initially */
+        }
+        
+        video[controls] {
+            display: block; /* Show the video when controls are enabled */
+        }
+    
+        .start-learning-btn {
+            background-color: #007bff; /* Blue for "Start Learning" */
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .start-learning-btn[data-state="stop"] {
+            background-color: #dc3545; /* Red for "Stop Learning" */
+        }
+        
+        .start-learning-btn:hover {
+            opacity: 0.9;
+        }
+
+/* Grades Section Styles */
+     /* Grade Assessment Section Styles */
+     .grade-assessment-section {
+        padding: 2rem 0;
+    }
+
+    .submissions-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .submissions-table th,
+    .submissions-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .submissions-table th {
+        background-color: #f5f5f5;
+    }
+
+    .status {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .status.pending {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    .status.assigned {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .grade-input {
+        width: 80px;
+        padding: 4px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .grade-btn {
+        padding: 4px 8px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .grade-btn:disabled {
+        background-color: #6c757d; /* Dark grey */
+        cursor: not-allowed;
+    }
+.grades-section {
+    background-color: var(--cultured-1);
+}
+
+.grades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* Grade Card Styles */
+.grade-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: var(--shadow-1);
+    transition: transform var(--transition), box-shadow var(--transition);
+    text-align: center;
+}
+
+.grade-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-2);
+}
+
+.grade-card .card-icon {
+    font-size: 2.5rem;
+    color: var(--orange-soda);
+    margin-bottom: 1rem;
+}
+
+.grade-card .card-title {
+    font-size: var(--fs-3);
+    font-weight: var(--fw-600);
+    color: var(--prussian-blue);
+    margin-bottom: 1rem;
+}
+
+.grade-card .card-description {
+    font-size: var(--fs-5);
+    color: var(--cadet);
+    margin-bottom: 1.5rem;
+}
+
+.grade-card .card-button {
+    display: inline-block;
+    background-color: var(--orange-soda);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: var(--fs-5);
+    font-weight: var(--fw-600);
+    transition: background-color var(--transition);
+}
+
+.grade-card .card-button:hover {
+    background-color: var(--navy-blue);
+}
+
+/* Assignments Section Styles */
+.assignments-section {
+    background-color: var(--cultured-2);
+}
+
+.assignments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* Assignment Card Styles */
+.assignment-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: var(--shadow-1);
+    transition: transform var(--transition), box-shadow var(--transition);
+    text-align: center;
+}
+
+.assignment-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-2);
+}
+
+.assignment-card .card-icon {
+    font-size: 2.5rem;
+    color: var(--light-blue);
+    margin-bottom: 1rem;
+}
+
+.assignment-card .card-title {
+    font-size: var(--fs-3);
+    font-weight: var(--fw-600);
+    color: var(--prussian-blue);
+    margin-bottom: 1rem;
+}
+
+.assignment-card .card-description {
+    font-size: var(--fs-5);
+    color: var(--cadet);
+    margin-bottom: 1.5rem;
+}
+
+.assignment-card .card-button {
+    display: inline-block;
+    background-color: var(--light-blue);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: var(--fs-5);
+    font-weight: var(--fw-600);
+    transition: background-color var(--transition);
+}
+
+.assignment-card .card-button:hover {
+    background-color: var(--navy-blue);
+}
+
+
+
+/* Quiz Section */
+.quiz-section {
+    width: 90%;
+    max-width: 1200px; /* Increase max-width for horizontal layout */
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 0 auto; /* Center the section */
+}
+
+.section-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.quiz-grid {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
+    gap: 20px; /* Space between cards */
+    
+}
+
+.quiz-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quiz-card:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.quiz-card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+.quiz-choices {
+    margin-bottom: 15px;
+}
+
+.choice-label {
+    display: block;
+    background: #f8f9fa;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.choice-label:hover {
+    background: #e9ecef;
+}
+
+input[type="radio"] {
+    margin-right: 8px;
+}
+
+.card-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.card-button:hover {
+    background-color: #0056b3;
+}
+
+.quiz-result {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.result-message {
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .quiz-grid {
+        grid-template-columns: 1fr; /* Stack cards vertically on smaller screens */
+    }
+}
+
+/* Add these styles to your CSS */
+.correct {
+    color: green; /* Green text for correct answers */
+    font-weight: bold;
+}
+
+.incorrect {
+    color: red; /* Red text for incorrect answers */
+    font-weight: bold;
+}
+
+.choice-label input[type="radio"]:checked + .correct {
+    background-color: #e6ffe6; /* Light green background for correct selected answer */
+}
+
+.choice-label input[type="radio"]:checked + .incorrect {
+    background-color: #ffe6e6; /* Light red background for incorrect selected answer */
+}
+/* Footer Styles */
+.footer {
+    background-color: var(--raisin-black-2);
+    color: var(--cultured-1);
+    padding: var(--section-padding) 0;
+}
+
+.footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section {
+    text-align: left;
+}
+
+.footer-title {
+    font-size: var(--fs-3);
+    font-weight: var(--fw-600);
+    color: var(--light-blue);
+    margin-bottom: 1rem;
+}
+
+.footer-description {
+    font-size: var(--fs-5);
+    color: var(--cultured-1);
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: var(--cultured-1);
+    font-size: var(--fs-5);
+    transition: color var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--light-blue);
+}
+
+.footer-contact {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-contact li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--fs-5);
+    color: var(--cultured-1);
+}
+
+.footer-contact i {
+    color: var(--light-blue);
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    color: var(--cultured-1);
+    font-size: 1.25rem;
+    transition: color var(--transition);
+}
+
+.social-link:hover {
+    color: var(--light-blue);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--raisin-black-1);
+    font-size: var(--fs-5);
+    color: var(--cultured-1);
+}
+
+

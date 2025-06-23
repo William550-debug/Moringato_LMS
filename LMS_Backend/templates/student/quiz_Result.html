@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+</head>
+<body>
+
+
+    
+
+    {% block content %}
+    <h1>Quiz Result</h1>
+    <p><strong>Question:</strong> {{ question.question_text }}</p>
+    <p><strong>Your Answer:</strong> {{ attempt.selected_answer }}</p>
+    <p><strong>Correct Answer:</strong> {{ question.correct_answer }}</p>
+    <p><strong>Result:</strong> {% if attempt.is_correct %}Correct!{% else %}Incorrect.{% endif %}</p>
+    <a href="{% url 'quiz_list' %}" class="btn btn-primary">Back to Quiz List</a>
+    {% endblock %}
+
+
+</body>
+</html>
